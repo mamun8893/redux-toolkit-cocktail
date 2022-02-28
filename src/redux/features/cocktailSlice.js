@@ -9,7 +9,7 @@ export const fatchCocktails = createAsyncThunk(
   }
 );
 
-export const cocktailSlice = createSlice({
+const cocktailSlice = createSlice({
   name: "cocktails",
   initialState: {
     cocktails: [],
@@ -31,3 +31,5 @@ export const cocktailSlice = createSlice({
     },
   },
 });
+
+export default cocktailSlice.reducer;
