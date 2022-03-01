@@ -20,6 +20,16 @@ export const fatchSingleCocktails = createAsyncThunk(
   }
 );
 
+//Fatch Search Cocktail
+export const fatchSearchCocktails = createAsyncThunk(
+  "coaktails/fatchSearchCocktails",
+  async ({ searchText }) => {
+    return fetch(
+      `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${searchText}`
+    ).then((res) => res.json());
+  }
+);
+
 const cocktailSlice = createSlice({
   name: "cocktails",
   initialState: {
@@ -48,6 +58,17 @@ const cocktailSlice = createSlice({
       state.loading = false;
     },
     [fatchSingleCocktails.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+    [fatchSearchCocktails.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [fatchSearchCocktails.fulfilled]: (state, action) => {
+      state.cocktails = action.payload.drinks;
+      state.loading = false;
+    },
+    [fatchSearchCocktails.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload;
     },

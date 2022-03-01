@@ -40,6 +40,14 @@ const CocktailList = () => {
     );
   }
 
+  if (!cocktails) {
+    return (
+      <h2 className="text-center text-danger">
+        No Coaktails Match your search Criteria
+      </h2>
+    );
+  }
+
   return (
     <div className="container">
       <div className="row row-cols-md-3 row-cols-1">
